@@ -1,0 +1,22 @@
+{
+  "name": "webgl-math",
+  "version": "0.0.1",
+  "description": "A Mathematics Library for WebGL",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cevherkarakoc/WebGL-Math.git"
+  },
+  "author": "cevherkarakoc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cevherkarakoc/WebGL-Math/issues"
+  },
+  "homepage": "https://github.com/cevherkarakoc/WebGL-Math#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}
