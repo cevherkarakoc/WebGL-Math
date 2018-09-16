@@ -1,7 +1,5 @@
 const GLMath = require("../index");
 
-
-
 describe("Vector Functions", () => {
   describe("Unary Operations, A(-0.45, 0.24, 2.71) and S = 7.6", () => {
     const vectorA = [-0.45, 0.24, 2.71];
@@ -40,9 +38,9 @@ describe("Vector Functions", () => {
     test('A * S to equal (-3.42, 1.824, 20.596)', () => {
       const result = GLMath.Vector.scale(vectorA, S);
 
-      expect(result[0]).toBeCloseTo(-3.42  );
-      expect(result[1]).toBeCloseTo( 1.824 );
-      expect(result[2]).toBeCloseTo( 20.596);
+      expect(result[0]).toBeCloseTo(-3.42);
+      expect(result[1]).toBeCloseTo(1.824);
+      expect(result[2]).toBeCloseTo(20.596);
       // Check Side Effects
       expect(vectorA).toEqual(safe_vectorA);
     });
@@ -51,8 +49,8 @@ describe("Vector Functions", () => {
       const result = GLMath.Vector.normalize(vectorA);
 
       expect(result[0]).toBeCloseTo(-0.16319);
-      expect(result[1]).toBeCloseTo( 0.08703);
-      expect(result[2]).toBeCloseTo( 0.98275);
+      expect(result[1]).toBeCloseTo(0.08703);
+      expect(result[2]).toBeCloseTo(0.98275);
       expect(GLMath.Vector.length(result)).toBeCloseTo(1.0);
       // Check Side Effects
       expect(vectorA).toEqual(safe_vectorA);
@@ -88,11 +86,11 @@ describe("Vector Functions", () => {
       expect(vectorB).toEqual(safe_vectorB);
     });
 
-    test('A * B (element-wise) to equal (0.07, 0.18, -0.08)', () => {
+    test('A * B (component-wise) to equal (0.07, 0.18, -0.08)', () => {
       const result = GLMath.Vector.multiply(vectorA, vectorB);
 
-      expect(result[0]).toBeCloseTo( 0.07);
-      expect(result[1]).toBeCloseTo( 0.18);
+      expect(result[0]).toBeCloseTo(0.07);
+      expect(result[1]).toBeCloseTo(0.18);
       expect(result[2]).toBeCloseTo(-0.08);
       // Check Side Effects
       expect(vectorA).toEqual(safe_vectorA);
