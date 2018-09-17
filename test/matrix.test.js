@@ -26,6 +26,20 @@ describe("Matrix Functions", () => {
         6.3, -1.2, 3.5
       ];
 
+    test('Out Matrix', () => {
+      const result = GLMath.Matrix.out(matrixA);
+
+      const expected =
+        new Float32Array([2.5, -3.2, 6.3,
+          3.7, 1.5, -1.2,
+          5.0, -11.8, 3.5
+        ]);
+
+      expect(result).toEqual(expected);
+      // Check Side Effects
+      expect(matrixA).toEqual(safe_matrixA);
+    });
+
     test('Determinant of A to equal -283.943', () => {
       const result = GLMath.Matrix.determinant(matrixA);
 

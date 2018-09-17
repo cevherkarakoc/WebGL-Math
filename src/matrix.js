@@ -1,6 +1,7 @@
 const Vector = require('./vector');
 
 // Only Square Matrix
+
 const slice = (matA, length) => Array
   .from(new Array(length), (_, index) => matA.slice(index * length, (index + 1) * length));
 
@@ -9,6 +10,8 @@ const flat = (slicedMat) => slicedMat.reduce((acc, value) => acc.concat(value));
 const idendity = (rowCount) => Array.from(Array(rowCount * rowCount)).map(
   (value, index) => index % (rowCount + 1) == 0 ? 1 : 0
 );
+
+const out = matA => new Float32Array(transpose(matA));
 
 const determinant = (matA) => {
   if (matA.length === 1) return matA[0];
@@ -125,6 +128,7 @@ const Camera = {
 }
 
 module.exports = {
+  out,
   idendity,
   determinant,
   transpose,
