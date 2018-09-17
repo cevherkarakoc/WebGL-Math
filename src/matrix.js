@@ -105,6 +105,25 @@ const Transform = {
   rotate: (matA, angle, axis) => _rotate(matA, _rotateHelperMatrix(angle, axis))
 }
 
+const Camera = {
+  perspective: (fovy, aspect, near, far) => {
+    const thf = 1 / Math.tan(fovy * 0.5);
+
+    return [
+      thf / aspect, 0, 0, 0,
+      0, thf, 0, 0,
+      0, 0, (far + near) / (near - far), (2 * far * near) / (near - far),
+      0, 0, -1, 0
+    ]
+  },
+  ortho: (left, right, bottom, top, near, far) => [
+    2 / (left - right), 0, 0, (right + left) / (left - right),
+    0, 2 / (top - bottom), 0, (top + bottom) / (bottom - top),
+    0, 0, 2 / (near - far), (far + near) / (near - far),
+    0, 0, 0, 1
+  ]
+}
+
 module.exports = {
   idendity,
   determinant,
@@ -115,5 +134,6 @@ module.exports = {
   add,
   subtract,
   multiply,
-  Transform
+  Transform,
+  Camera
 }

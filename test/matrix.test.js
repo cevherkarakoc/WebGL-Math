@@ -214,17 +214,54 @@ describe("Matrix Functions", () => {
           0, 0, 0, 1
         ];
 
-      expect(result[0]).toBeCloseTo( expected[0] );
-      expect(result[1]).toBeCloseTo( expected[1] );
-      expect(result[5]).toBeCloseTo( expected[5] );
-      expect(result[6]).toBeCloseTo( expected[6] );
-      expect(result[8]).toBeCloseTo( expected[8] );
-      expect(result[10]).toBeCloseTo( expected[10] );
-      expect(result[15]).toBeCloseTo( expected[15] );
-      
+      expect(result[0]).toBeCloseTo(expected[0]);
+      expect(result[1]).toBeCloseTo(expected[1]);
+      expect(result[5]).toBeCloseTo(expected[5]);
+      expect(result[6]).toBeCloseTo(expected[6]);
+      expect(result[8]).toBeCloseTo(expected[8]);
+      expect(result[10]).toBeCloseTo(expected[10]);
+      expect(result[15]).toBeCloseTo(expected[15]);
+
       // Check Side Effects
       expect(matrixA).toEqual(safe_matrixA);
     });
 
+  });
+
+  describe('Camera Functions', () => {
+    test('Perspective Camera ', () => {
+      const result = GLMath.Matrix.Camera.perspective(Math.PI / 6.0, 1.66, 3, 10);
+
+      const expected =
+        [2.248223304748535, 0, 0, 0,
+          0, 3.732050895690918, 0, 0,
+          0, 0, -1.8571428060531616, -8.571428298950195,
+          0, 0, -1, 0
+        ];
+
+      expect(result[0]).toBeCloseTo(expected[0]);
+      expect(result[2]).toBeCloseTo(expected[2]);
+      expect(result[5]).toBeCloseTo(expected[5]);
+      expect(result[10]).toBeCloseTo(expected[10]);
+      expect(result[10]).toBeCloseTo(expected[10]);
+      expect(result[14]).toBeCloseTo(expected[14]);
+    });
+
+    test('Orthogonal Camera ', () => {
+      const result = GLMath.Matrix.Camera.ortho(-100, 100, -200, 200, 5, 100);
+
+      const expected =
+        [0.009999999776482582, 0, 0, 0,
+          0, 0.004999999888241291, 0, 0,
+          0, 0, -0.021052632480859756, -1.105263113975525,
+          0, 0, 0, 1
+        ];
+
+      expect(result[2]).toBeCloseTo(expected[2]);
+      expect(result[5]).toBeCloseTo(expected[5]);
+      expect(result[10]).toBeCloseTo(expected[10]);
+      expect(result[10]).toBeCloseTo(expected[10]);
+      expect(result[15]).toBeCloseTo(expected[15]);
+    });
   });
 });
