@@ -163,12 +163,27 @@ describe("Matrix Functions", () => {
     });
 
     test('A * B (component-wise) to equal expected', () => {
-      const result = GLMath.Matrix.multiply(matrixA, matrixB);
+      const result = GLMath.Matrix.multiplyCompWise(matrixA, matrixB);
 
       const expected =
         [-8, 5, 0,
           4, 36, -7,
         -30, 2, -21
+        ];
+
+      expect(result).toEqual(expected);
+      // Check Side Effects
+      expect(matrixA).toEqual(safe_matrixA);
+      expect(matrixB).toEqual(safe_matrixB);
+    });
+
+    test('A * B to equal expected', () => {
+      const result = GLMath.Matrix.multiply(matrixA, matrixB);
+
+      const expected =
+        [-43, -50, -26,
+          47, 42, 53,
+        -47, -27, -23
         ];
 
       expect(result).toEqual(expected);

@@ -47,7 +47,17 @@ const add = (matA, matB) => matA.map((value, index) => value + matB[index]);
 
 const subtract = (matA, matB) => add(matA, negative(matB));
 
-const multiply = (matA, matB) => matA.map((value, index) => value * matB[index]); // component-wise
+const multiplyCompWise = (matA, matB) => matA.map((value, index) => value * matB[index]); // component-wise
+
+const _multiply = (matA, matB) => Array.from(
+  new Array(matA.length * matA.length),
+  (_, index) => Vector.dot(matA[Math.floor(index / matA.length)], matB[index % matA.length])
+);
+
+const multiply = (matA, matB) => _multiply(
+  slice(matA, Math.sqrt(matA.length)),
+  slice(transpose(matB), Math.sqrt(matB.length))
+);
 
 // Transform Functions
 
@@ -137,6 +147,7 @@ module.exports = {
   multiplyVector,
   add,
   subtract,
+  multiplyCompWise,
   multiply,
   Transform,
   Camera
