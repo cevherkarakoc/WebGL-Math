@@ -127,14 +127,32 @@ const Camera = {
       0, thf, 0, 0,
       0, 0, (far + near) / (near - far), (2 * far * near) / (near - far),
       0, 0, -1, 0
-    ]
+    ];
   },
   ortho: (left, right, bottom, top, near, far) => [
     2 / (left - right), 0, 0, (right + left) / (left - right),
     0, 2 / (top - bottom), 0, (top + bottom) / (bottom - top),
     0, 0, 2 / (near - far), (far + near) / (near - far),
     0, 0, 0, 1
-  ]
+  ],
+
+  lookAt: (eye, target, _up) => {
+    const forward = Vector.normalize(Vector.subtract(eye, target));
+    const right = Vector.cross(Vector.normalize(_up), forward);
+    const up = Vector.cross(forward, right);
+
+    return multiply(
+      flat(
+        [
+          right.concat(0),
+          up.concat(0),
+          forward.concat(0),
+          [0, 0, 0, 1],
+        ]
+      ),
+      Transform.translate(idendity(4), negative(eye))
+    );
+  }
 }
 
 module.exports = {

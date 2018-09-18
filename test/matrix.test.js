@@ -292,5 +292,18 @@ describe("Matrix Functions", () => {
       expect(result[10]).toBeCloseTo(expected[10]);
       expect(result[15]).toBeCloseTo(expected[15]);
     });
+
+    test('LookAt matrix to equal expected', () => {
+      const result = GLMath.Matrix.Camera.lookAt([0, 0, 15], [0, 0, -3], [0, 1, 0]);
+
+      const expected =
+        [1, 0, 0, 0,
+          0, 1, 0, 0,
+          0, 0, 1, -15,
+          0, 0, 0, 1
+        ];
+
+      expect(result).toEqual(expected);
+    });
   });
 });
