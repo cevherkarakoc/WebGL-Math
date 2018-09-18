@@ -105,6 +105,17 @@ describe("Vector Functions", () => {
       expect(vectorA).toEqual(safe_vectorA);
       expect(vectorB).toEqual(safe_vectorB);
     });
+
+    test('A cross B to equal (0.3, -0.18, -0.39)', () => {
+      const result = GLMath.Vector.cross  (vectorA, vectorB);
+
+      expect(result[0]).toBeCloseTo(0.3);
+      expect(result[1]).toBeCloseTo(-0.18);
+      expect(result[2]).toBeCloseTo(-0.39);
+      // Check Side Effects
+      expect(vectorA).toEqual(safe_vectorA);
+      expect(vectorB).toEqual(safe_vectorB);
+    });
   });
 });
 

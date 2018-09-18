@@ -18,6 +18,12 @@ const multiply = (vecA, vecB) => vecA.map( (value, index) => value * vecB[index]
 
 const dot = (vecA, vecB) => vecA.reduce((acc, val, index) => acc + val * vecB[index], 0.0);
 
+const cross = (vecA, vecB) => [ 
+  vecA[1] * vecB[2] - vecA[2] * vecB[1],
+  vecA[2] * vecB[0] - vecA[0] * vecB[2],
+  vecA[0] * vecB[1] - vecA[1] * vecB[0],
+]
+
 module.exports = {
   negative,
   reverse,
@@ -27,5 +33,6 @@ module.exports = {
   add,
   subtract,
   multiply,
-  dot
+  dot,
+  cross
 }
