@@ -2,8 +2,8 @@ const GLMath = require("../index");
 
 describe("Vector Functions", () => {
   describe("Unary Operations, A(-0.45, 0.24, 2.71) and S = 7.6", () => {
-    const vectorA = [-0.45, 0.24, 2.71];
-    const safe_vectorA = [-0.45, 0.24, 2.71];
+    const vectorA = new Float32Array([-0.45, 0.24, 2.71]);
+    const safe_vectorA = new Float32Array([-0.45, 0.24, 2.71]);
 
     const S = 7.6;
 
@@ -58,11 +58,11 @@ describe("Vector Functions", () => {
   });
 
   describe("Binary Operations, A(0.1, 0.6, -0.2) and B(0.7, 0.3, 0.4)", () => {
-    const vectorA = [0.1, 0.6, -0.2];
-    const vectorB = [0.7, 0.3, 0.4];
+    const vectorA = new Float32Array([0.1, 0.6, -0.2]);
+    const vectorB = new Float32Array([0.7, 0.3, 0.4]);
 
-    const safe_vectorA = [0.1, 0.6, -0.2];
-    const safe_vectorB = [0.7, 0.3, 0.4];
+    const safe_vectorA = new Float32Array([0.1, 0.6, -0.2]);
+    const safe_vectorB = new Float32Array([0.7, 0.3, 0.4]);
 
     test('A + B to equal (0.8, 0.9, 0.2)', () => {
       const result = GLMath.Vector.add(vectorA, vectorB);
