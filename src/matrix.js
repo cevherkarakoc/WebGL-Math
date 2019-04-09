@@ -11,7 +11,7 @@ const idendity = (rowCount) => Array.from(Array(rowCount * rowCount)).map(
   (value, index) => index % (rowCount + 1) == 0 ? 1 : 0
 );
 
-const out = matA => new Float32Array(transpose(matA));
+const out = matA => new Float32Array(matA);
 
 const determinant = (matA) => {
   if (matA.length === 1) return matA[0];
@@ -40,7 +40,7 @@ const negative = (matA) => multiplyScalar(matA, -1);
 
 const multiplyScalar = (matA, number) => matA.map(value => value * number);
 
-const multiplyVector = (matA, vecA) => slice(matA, vecA.length)
+const multiplyVector = (matA, vecA) => slice(transpose(matA), vecA.length)
   .map(row => row.reduce((acc, value, index) => acc + value * vecA[index], 0.0));
 
 const add = (matA, matB) => matA.map((value, index) => value + matB[index]);
@@ -51,12 +51,12 @@ const multiplyCompWise = (matA, matB) => matA.map((value, index) => value * matB
 
 const _multiply = (matA, matB) => Array.from(
   new Array(matA.length * matA.length),
-  (_, index) => Vector.dot(matA[Math.floor(index / matA.length)], matB[index % matA.length])
+  (_, index) => Vector.dot(matA[index % matA.length], matB[Math.floor(index / matA.length)])
 );
 
 const multiply = (matA, matB) => _multiply(
-  slice(matA, Math.sqrt(matA.length)),
-  slice(transpose(matB), Math.sqrt(matB.length))
+  slice(transpose(matA), Math.sqrt(matA.length)),
+  slice(matB, Math.sqrt(matB.length))
 );
 
 // Transform Functions
@@ -88,7 +88,7 @@ const _rotateHelperMatrix = (angle, _axis) => {
   return [col1, col2, col3];
 }
 
-const _translate = (matA, vecA) => transpose(flat(slice(transpose(matA), vecA.length)
+const _translate = (matA, vecA) => flat(slice(matA, vecA.length)
   .map((value, index, arr) => index !== (arr.length - 1)
     ? value
     : arr.reduce(
@@ -96,21 +96,21 @@ const _translate = (matA, vecA) => transpose(flat(slice(transpose(matA), vecA.le
       new Array(vecA.length).fill(0.0)
     )
   )
-));
+);
 
-const _rotate = (matA, matR) => transpose(flat(slice(transpose(matA), 4)
+const _rotate = (matA, matR) => flat(slice(matA, 4)
   .map((value, i, arr) => i === (arr.length - 1)
     ? value
     : arr.slice(0, 3).reduce(
       (acc, value, j) => Vector.add(acc, Vector.scale(value, matR[i][j])),
       new Array(4).fill(0.0)
     ))
-));
+);
 
-const _scale = (matA, vecA) => transpose(flat(
-  slice(transpose(matA), vecA.length)
+const _scale = (matA, vecA) => flat(
+  slice(matA, vecA.length)
     .map((row, index) => Vector.scale(row, vecA[index]))
-));
+);
 
 const Transform = {
   scale: (matA, vecA) => _scale(matA, vecA.concat(1.0)),
@@ -125,15 +125,15 @@ const Camera = {
     return [
       thf / aspect, 0, 0, 0,
       0, thf, 0, 0,
-      0, 0, (far + near) / (near - far), (2 * far * near) / (near - far),
-      0, 0, -1, 0
+      0, 0, (far + near) / (near - far), -1,
+      0, 0, (2 * far * near) / (near - far), 0
     ];
   },
   ortho: (left, right, bottom, top, near, far) => [
-    2 / (left - right), 0, 0, (right + left) / (left - right),
-    0, 2 / (top - bottom), 0, (top + bottom) / (bottom - top),
-    0, 0, 2 / (near - far), (far + near) / (near - far),
-    0, 0, 0, 1
+    2 / (left - right), 0, 0, 0,
+    0, 2 / (top - bottom), 0, 0,
+    0, 0, 2 / (near - far), 0,
+    (right + left) / (left - right), (top + bottom) / (bottom - top), (far + near) / (near - far), 1
   ],
 
   lookAt: (eye, target, _up) => {
@@ -142,14 +142,14 @@ const Camera = {
     const up = Vector.cross(forward, right);
 
     return multiply(
-      flat(
+      transpose(flat(
         [
           right.concat(0),
           up.concat(0),
           forward.concat(0),
           [0, 0, 0, 1],
         ]
-      ),
+      )),
       Transform.translate(idendity(4), negative(eye))
     );
   }

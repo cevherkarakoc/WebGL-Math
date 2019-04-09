@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test-watchAll" : "jest --watchAll",
     "test-vector": "jest vector",
     "test-matrix": "jest matrix"
   },
