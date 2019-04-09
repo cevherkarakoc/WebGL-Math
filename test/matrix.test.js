@@ -30,9 +30,9 @@ describe("Matrix Functions", () => {
       const result = GLMath.Matrix.out(matrixA);
 
       const expected =
-        new Float32Array([2.5, -3.2, 6.3,
-          3.7, 1.5, -1.2,
-          5.0, -11.8, 3.5
+        new Float32Array([2.5, 3.7, 5.0,
+          -3.2, 1.5, -11.8,
+          6.3, -1.2, 3.5
         ]);
 
       expect(result).toEqual(expected);
