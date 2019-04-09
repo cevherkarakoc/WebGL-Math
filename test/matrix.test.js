@@ -121,10 +121,10 @@ describe("Matrix Functions", () => {
       expect(matrixA).toEqual(safe_matrixA);
     });
 
-    test('A * V to equal  (12, -17.5, 11)', () => {
+    test('A * V to equal  (12, -10.5, 14.5)', () => {
       const result = GLMath.Matrix.multiplyVector(matrixA, V);
 
-      const expected = [12, -17.5, 11];
+      const expected = [12, -10.5, 14.5];
 
       expect(result).toEqual(expected);
       // Check Side Effects
@@ -181,9 +181,9 @@ describe("Matrix Functions", () => {
       const result = GLMath.Matrix.multiply(matrixA, matrixB);
 
       const expected =
-        [-43, -50, -26,
-          47, 42, 53,
-        -47, -27, -23
+        [-9, -23, -53,
+          16, 14, 35,
+        -5, -48, -29
         ];
 
       expect(result).toEqual(expected);
@@ -221,10 +221,10 @@ describe("Matrix Functions", () => {
       const result = GLMath.Matrix.Transform.translate(matrixA, V);
 
       const expected =
-        [1, 0, 0, 1.5,
-          0, 1, 0, 3.0,
-          0, 0, 1, 0.75,
-          0, 0, 0, 1
+        [1, 0, 0, 0,
+          0, 1, 0, 0,
+          0, 0, 1, 0,
+          1.5, 3.0, 0.75, 1
         ];
 
       expect(result).toEqual(expected);
@@ -237,9 +237,9 @@ describe("Matrix Functions", () => {
       const result = GLMath.Matrix.Transform.rotate(matrixA, Math.PI / 4, [1, 1, 0]);
 
       const expected =
-        [0.8535534143447876, 0.1464466154575348, 0.5, 0,
-          0.1464466154575348, 0.8535534143447876, -0.5, 0,
-          -0.5, 0.5, 0.7071067690849304, 0,
+        [0.8535534143447876, 0.1464466154575348, -0.5, 0,
+          0.1464466154575348, 0.8535534143447876, 0.5, 0,
+          0.5, -0.5, 0.7071067690849304, 0,
           0, 0, 0, 1
         ];
 
@@ -264,8 +264,8 @@ describe("Matrix Functions", () => {
       const expected =
         [2.248223304748535, 0, 0, 0,
           0, 3.732050895690918, 0, 0,
-          0, 0, -1.8571428060531616, -8.571428298950195,
-          0, 0, -1, 0
+          0, 0, -1.8571428060531616, -1,
+          0, 0, -8.571428298950195, 0
         ];
 
       expect(result[0]).toBeCloseTo(expected[0]);
@@ -282,8 +282,8 @@ describe("Matrix Functions", () => {
       const expected =
         [0.009999999776482582, 0, 0, 0,
           0, 0.004999999888241291, 0, 0,
-          0, 0, -0.021052632480859756, -1.105263113975525,
-          0, 0, 0, 1
+          0, 0, -0.021052632480859756, 0,
+          0, 0, -1.105263113975525, 1
         ];
 
       expect(result[2]).toBeCloseTo(expected[2]);
@@ -299,8 +299,8 @@ describe("Matrix Functions", () => {
       const expected =
         [1, 0, 0, 0,
           0, 1, 0, 0,
-          0, 0, 1, -15,
-          0, 0, 0, 1
+          0, 0, 1, 0,
+          0, 0, -15, 1
         ];
 
       expect(result).toEqual(expected);
