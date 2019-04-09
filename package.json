@@ -1,6 +1,6 @@
 {
   "name": "webgl-math",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A Mathematics Library for WebGL",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/cevherkarakoc/WebGL-Math#readme",
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "^24.6.0"
   }
 }
