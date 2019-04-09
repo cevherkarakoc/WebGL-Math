@@ -243,13 +243,8 @@ describe("Matrix Functions", () => {
           0, 0, 0, 1
         ];
 
-      expect(result[0]).toBeCloseTo(expected[0]);
-      expect(result[1]).toBeCloseTo(expected[1]);
-      expect(result[5]).toBeCloseTo(expected[5]);
-      expect(result[6]).toBeCloseTo(expected[6]);
-      expect(result[8]).toBeCloseTo(expected[8]);
-      expect(result[10]).toBeCloseTo(expected[10]);
-      expect(result[15]).toBeCloseTo(expected[15]);
+      for (let i = 0; i < 16; i++)
+        expect(result[i]).toBeCloseTo(expected[i]);
 
       // Check Side Effects
       expect(matrixA).toEqual(safe_matrixA);
@@ -268,12 +263,8 @@ describe("Matrix Functions", () => {
           0, 0, -8.571428298950195, 0
         ];
 
-      expect(result[0]).toBeCloseTo(expected[0]);
-      expect(result[2]).toBeCloseTo(expected[2]);
-      expect(result[5]).toBeCloseTo(expected[5]);
-      expect(result[10]).toBeCloseTo(expected[10]);
-      expect(result[10]).toBeCloseTo(expected[10]);
-      expect(result[14]).toBeCloseTo(expected[14]);
+      for (let i = 0; i < 16; i++)
+        expect(result[i]).toBeCloseTo(expected[i]);
     });
 
     test('Orthogonal Camera ', () => {
@@ -286,11 +277,8 @@ describe("Matrix Functions", () => {
           0, 0, -1.105263113975525, 1
         ];
 
-      expect(result[2]).toBeCloseTo(expected[2]);
-      expect(result[5]).toBeCloseTo(expected[5]);
-      expect(result[10]).toBeCloseTo(expected[10]);
-      expect(result[10]).toBeCloseTo(expected[10]);
-      expect(result[15]).toBeCloseTo(expected[15]);
+      for (let i = 0; i < 16; i++)
+        expect(result[i]).toBeCloseTo(expected[i]);
     });
 
     test('LookAt matrix to equal expected', () => {
