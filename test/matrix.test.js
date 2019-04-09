@@ -181,9 +181,9 @@ describe("Matrix Functions", () => {
       const result = GLMath.Matrix.multiply(matrixA, matrixB);
 
       const expected =
-        [-9, -23, -53,
-          16, 14, 35,
-        -5, -48, -29
+        [-9, 16, -5,
+          23, 14, -48,
+        -53, 35, -29
         ];
 
       expect(result).toEqual(expected);
@@ -271,8 +271,8 @@ describe("Matrix Functions", () => {
       const result = GLMath.Matrix.Camera.ortho(-100, 100, -200, 200, 5, 100);
 
       const expected =
-        [0.009999999776482582, 0, 0, 0,
-          0, 0.004999999888241291, 0, 0,
+        [-0.01, 0, 0, 0,
+          0, 0.005, 0, 0,
           0, 0, -0.021052632480859756, 0,
           0, 0, -1.105263113975525, 1
         ];
