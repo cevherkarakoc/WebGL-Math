@@ -3,15 +3,15 @@ const Vector = require('./vector');
 // Only Square Matrix
 
 const slice = (matA, length) => Array
-  .from(new Array(length), (_, index) => matA.slice(index * length, (index + 1) * length));
+  .from(new Float32Array(length), (_, index) => matA.slice(index * length, (index + 1) * length));
 
-const flat = (slicedMat) => slicedMat.reduce((acc, value) => acc.concat(value));
+const flat = (slicedMat) => new Float32Array(slicedMat.reduce(
+  (acc, value) => Vector.concat(acc, new Float32Array(value))
+));
 
-const idendity = (rowCount) => Array.from(Array(rowCount * rowCount)).map(
+const idendity = (rowCount) => Float32Array.from(new Float32Array(rowCount * rowCount)).map(
   (value, index) => index % (rowCount + 1) == 0 ? 1 : 0
 );
-
-const out = matA => new Float32Array(matA);
 
 const determinant = (matA) => {
   if (matA.length === 1) return matA[0];
@@ -31,8 +31,8 @@ const determinant = (matA) => {
 const transpose = (matA) => {
   const row = Math.sqrt(matA.length);
 
-  return Array
-    .from(new Array(matA.length), (_, index) => (index % row) * row + Math.floor(index / row))
+  return Float32Array
+    .from(new Float32Array(matA.length), (_, index) => (index % row) * row + Math.floor(index / row))
     .map(value => matA[value]);
 }
 
@@ -40,8 +40,8 @@ const negative = (matA) => multiplyScalar(matA, -1);
 
 const multiplyScalar = (matA, number) => matA.map(value => value * number);
 
-const multiplyVector = (matA, vecA) => slice(transpose(matA), vecA.length)
-  .map(row => row.reduce((acc, value, index) => acc + value * vecA[index], 0.0));
+const multiplyVector = (matA, vecA) => new Float32Array(slice(transpose(matA), vecA.length)
+  .map(row => row.reduce((acc, value, index) => acc + value * vecA[index], 0.0)));
 
 const add = (matA, matB) => matA.map((value, index) => value + matB[index]);
 
@@ -49,8 +49,8 @@ const subtract = (matA, matB) => add(matA, negative(matB));
 
 const multiplyCompWise = (matA, matB) => matA.map((value, index) => value * matB[index]); // component-wise
 
-const _multiply = (matA, matB) => Array.from(
-  new Array(matA.length * matA.length),
+const _multiply = (matA, matB) => Float32Array.from(
+  new Float32Array(matA.length * matA.length),
   (_, index) => Vector.dot(matA[index % matA.length], matB[Math.floor(index / matA.length)])
 );
 
@@ -67,23 +67,23 @@ const _rotateHelperMatrix = (angle, _axis) => {
   const axis = Vector.normalize(_axis);
   const t = Vector.scale(axis, 1 - cos);
 
-  const col1 = [
+  const col1 = new Float32Array([
     cos + t[0] * axis[0],
     t[0] * axis[1] + sin * axis[2],
     t[0] * axis[2] - sin * axis[1]
-  ];
+  ]);
 
-  const col2 = [
+  const col2 = new Float32Array([
     t[1] * axis[0] - sin * axis[2],
     cos + t[1] * axis[1],
     t[1] * axis[2] + sin * axis[0],
-  ];
+  ]);
 
-  const col3 = [
+  const col3 = new Float32Array([
     t[2] * axis[0] + sin * axis[1],
     t[2] * axis[1] - sin * axis[0],
     cos + t[2] * axis[2],
-  ];
+  ]);
 
   return [col1, col2, col3];
 }
@@ -93,17 +93,17 @@ const _translate = (matA, vecA) => flat(slice(matA, vecA.length)
     ? value
     : arr.reduce(
       (acc, value, index) => Vector.add(acc, Vector.scale(value, vecA[index])),
-      new Array(vecA.length).fill(0.0)
+      new Float32Array(vecA.length).fill(0.0)
     )
   )
 );
 
-const _rotate = (matA, matR) => flat(slice(matA, 4)
+const _rotate = (matA, matR) => flat(slice(matA, Math.sqrt(matA.length))
   .map((value, i, arr) => i === (arr.length - 1)
     ? value
     : arr.slice(0, 3).reduce(
       (acc, value, j) => Vector.add(acc, Vector.scale(value, matR[i][j])),
-      new Array(4).fill(0.0)
+      new Float32Array(4).fill(0.0)
     ))
 );
 
@@ -113,8 +113,8 @@ const _scale = (matA, vecA) => flat(
 );
 
 const Transform = {
-  scale: (matA, vecA) => _scale(matA, vecA.concat(1.0)),
-  translate: (matA, vecA) => _translate(matA, vecA.concat(1.0)),
+  scale: (matA, vecA) => _scale(matA, Vector.concat(vecA, new Float32Array([1.0]))),
+  translate: (matA, vecA) => _translate(matA, Vector.concat(vecA, new Float32Array([1.0]))),
   rotate: (matA, angle, axis) => _rotate(matA, _rotateHelperMatrix(angle, axis))
 }
 
@@ -144,10 +144,10 @@ const Camera = {
     return multiply(
       transpose(flat(
         [
-          right.concat(0),
-          up.concat(0),
-          forward.concat(0),
-          [0, 0, 0, 1],
+          Vector.concat(right, new Float32Array([0.0])),
+          Vector.concat(up, new Float32Array([0.0])),
+          Vector.concat(forward, new Float32Array([0.0])),
+          new Float32Array([0, 0, 0, 1]),
         ]
       )),
       Transform.translate(idendity(4), negative(eye))
@@ -156,7 +156,6 @@ const Camera = {
 }
 
 module.exports = {
-  out,
   idendity,
   determinant,
   transpose,
