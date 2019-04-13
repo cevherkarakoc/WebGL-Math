@@ -46,9 +46,9 @@ up | Vector | up vector
 ### Examples
 
 ```js
-const eye = [0, 0, 0];  // origin
-const target = [0, 0, 3];
-const up = [0, 1, 0];
+const eye = new Float32Array([0, 0, 0]);  // origin
+const target = new Float32Array([0, 0, 3]);
+const up = new Float32Array([0, 1, 0]);
 
 const camera = GLMath.Matrix.Camera.lookAt(eye, target, up);
 
