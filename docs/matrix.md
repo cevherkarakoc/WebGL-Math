@@ -1,4 +1,4 @@
-# Matrix
+# Matrix (column-major)
 
 ## idendity
 Return the identity matrix : Matrix
@@ -41,8 +41,8 @@ matrix | Matrix | Matrix to transpose
 ### Examples
 
 ```js
-const myMatrix = [1, 2,
-                  3, 4];
+const myMatrix = new Float32Array([1, 2,
+                                   3, 4]);
 const transposeMatrix = GLMath.Matrix.transpose( myMatrix );
 
 //transposeMatrix : [1, 3,
@@ -59,8 +59,8 @@ matrix | Matrix | Matrix to negative
 ### Examples
 
 ```js
-const myMatrix = [4, -2,
-                  1, -3];
+const myMatrix = new Float32Array([4, -2,
+                                   1, -3]);
 const negativeMatrix = GLMath.Matrix.negative( myMatrix );
 
 //negativeMatrix : [-4, 2,
@@ -78,8 +78,8 @@ number | Number | Factor
 ### Examples
 
 ```js
-const myMatrix = [3, 4,
-                  5, 1];
+const myMatrix = new Float32Array([3, 4,
+                                   5, 1]);
 const resultMatrix = GLMath.Matrix.multiplyScalar( myMatrix , 3 );
 
 //resultMatrix : [9, 12,
@@ -97,11 +97,11 @@ vector | Vector | Vector
 ### Examples
 
 ```js
-const myMatrix = [3, 4,
-                  5, 1];
-const resultVector = GLMath.Matrix.multiplyVector( myMatrix , [2, 3] );
+const myMatrix = new Float32Array([3, 4,
+                                   5, 1]);
+const resultVector = GLMath.Matrix.multiplyVector( myMatrix , new Float32Array([2, 3]) );
 
-//resultVector : [18, 13]
+//resultVector : [21, 11]
 ```
 
 ## add
@@ -115,10 +115,10 @@ matrixB | Matrix | Second Matrix to add
 ### Examples
 
 ```js
-const matrixA = [1, 5,
-                 1, 3];
-const matrixB = [2, 3,
-                 4, 1];
+const matrixA = new Float32Array([1, 5,
+                                  1, 3]);
+const matrixB = new Float32Array([2, 3,
+                                  4, 1]);
 const resultMatrix = GLMath.Matrix.add( matrixA , matrixB );
 
 //resultMatrix : [3, 8,
@@ -136,10 +136,10 @@ matrixB | Matrix | Subtrahend Matrix
 ### Examples
 
 ```js
-const matrixA = [1, 5,
-                 1, 3];
-const matrixB = [2, 3,
-                 4, 1];
+const matrixA = new Float32Array([1, 5,
+                                  1, 3]);
+const matrixB = new Float32Array([2, 3,
+                                  4, 1]);
 const resultMatrix = GLMath.Matrix.subtract( matrixA , matrixB );
 
 //resultMatrix : [-1, 2,
@@ -157,10 +157,10 @@ matrixB | Matrix | Second Matrix to multiply
 ### Examples
 
 ```js
-const matrixA = [1, 5,
-                 1, 3];
-const matrixB = [2, 3,
-                 4, 1];
+const matrixA = new Float32Array([1, 5,
+                                  1, 3]);
+const matrixB = new Float32Array([2, 3,
+                                  4, 1]);
 const resultMatrix = GLMath.Matrix.multiplyCompWise( matrixA , matrixB );
 
 //resultMatrix : [2, 15,
@@ -178,12 +178,12 @@ matrixB | Matrix | Right operand
 ### Examples
 
 ```js
-const matrixA = [1, 5,
-                 1, 3];
-const matrixB = [2, 3,
-                 4, 1];
+const matrixA = new Float32Array([1, 5,
+                                  1, 3]);
+const matrixB = new Float32Array([2, 3,
+                                  4, 1]);
 const resultMatrix = GLMath.Matrix.multiply( matrixA , matrixB );
 
-//resultMatrix : [22, 8,
-//                14, 6]
+//resultMatrix : [5, 19,
+//                5, 23]
 ```
