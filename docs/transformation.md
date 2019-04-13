@@ -13,12 +13,15 @@ vector | Vector | the translation vector
 ```js
 const myMatrix = GLMath.Matrix.idendity( 4 );
 
-const resultMatrix = GLMath.Matrix.Transform.translate(myMatrix, [1.5, 3.0, 0.75]);
+const resultMatrix = GLMath.Matrix.Transform.translate(
+  myMatrix, 
+  new Float32Array([1.5, 3.0, 0.75])
+);
 
-//resultMatrix : [1, 0, 0, 1.5 
-//                0, 1, 0, 3.0 
-//                0, 0, 1, 0.75
-//                0, 0, 0, 1.0 ]
+//resultMatrix : [1, 0, 0, 0 
+//                0, 1, 0, 0
+//                0, 0, 1, 0
+//                1.5, 3.0, 0.75, 1.0 ]
 ```
 
 ## rotate
@@ -35,14 +38,18 @@ axis | Vector | the axis to rotate around
 ```js
 const myMatrix = GLMath.Matrix.idendity( 4 );
 const angle = Math.PI / 4;
-const axis = [1, 1, 0];
+const axis = new Float32Array([1, 1, 0]);
 
-const resultMatrix = GLMath.Matrix.Transform.rotate(myMatrix, angle, axis);
+const resultMatrix = GLMath.Matrix.Transform.rotate(
+  myMatrix, 
+  angle,
+  axis
+);
 
 //resultMatrix : [0.009999999776482582, 0, 0, 0,
 //                0, 0.004999999888241291, 0, 0,
-//                0, 0, -0.021052632480859756, -1.105263113975525,
-//                0, 0, 0, 1
+//                0, 0, -0.021052632480859756, 0,
+//                0, 0, -1.105263113975525, 1
 //               ]
 ```
 
@@ -59,7 +66,7 @@ vector | Vector | the scaling vector
 ```js
 const myMatrix = GLMath.Matrix.idendity( 4 );
 
-const resultMatrix = GLMath.Matrix.Transform.scale(myMatrix, [1.5, 3.0, 0.75]);
+const resultMatrix = GLMath.Matrix.Transform.scale(myMatrix, new Float32Array([1.5, 3.0, 0.75]));
 
 //resultMatrix : [1.5, 0  , 0   , 0
 //                0  , 3.0, 0   , 0
