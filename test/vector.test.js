@@ -107,7 +107,7 @@ describe("Vector Functions", () => {
     });
 
     test('A cross B to equal (0.3, -0.18, -0.39)', () => {
-      const result = GLMath.Vector.cross  (vectorA, vectorB);
+      const result = GLMath.Vector.cross(vectorA, vectorB);
 
       expect(result[0]).toBeCloseTo(0.3);
       expect(result[1]).toBeCloseTo(-0.18);
@@ -115,6 +115,20 @@ describe("Vector Functions", () => {
       // Check Side Effects
       expect(vectorA).toEqual(safe_vectorA);
       expect(vectorB).toEqual(safe_vectorB);
+    });
+  });
+
+  describe("Non-Math Methods, A(9, 7, 5, -1)", () => {
+    const vectorA = new Float32Array([9, 7, 5, -1]);
+    const safe_vectorA = new Float32Array([9, 7, 5, -1]);
+
+    test('Swizzled A to equal expected', () => {
+      const result = GLMath.Vector.swizzle(vectorA, [1, 1, -3, 0, -0]);
+      const expected = new Float32Array([7, 7, 1, 9, -9]);
+
+      expect(result).toEqual(expected);
+      // Check Side Effects
+      expect(vectorA).toEqual(safe_vectorA);
     });
   });
 });
