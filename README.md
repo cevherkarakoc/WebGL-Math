@@ -1,16 +1,32 @@
 # WebGL-Math
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
+[![npm version](https://img.shields.io/npm/v/webgl-math.svg?style=flat)](https://www.npmjs.com/package/webgl-math)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
 A functional mathematics library for WebGL. 
 
-Usage
-------------
+# Usage
 
+## Getting Started
+Install with npm or yarn
+```
+npm install webgl-math
+// or
+yarn add webgl-math
+```
+ then
+
+```js
+const GLMath = require('webgl-math')
+// or
+import GLMath from 'webgl-math'
+```
+
+### Example
 Here's a simple example to create Model, View and Projection Matrices.
 
 For more, see the docs
 ```js
-import GLMath, { Vector, Matrix } from 'webgl-math';
+import { Vector, Matrix } from 'webgl-math';
 
 const scaleMatrix = Matrix.Transform.scale(
   Matrix.idendity(4), 
@@ -29,16 +45,15 @@ const modelMatrix = Matrix.multiply(
 );
 
 // Creating Perspective Projection Matrix with fovy and aspect ratio
-const projectionMatrix = Camera.perspective(Math.PI / 4, 1, 0.1, 100);
+const projectionMatrix = Matrix.Camera.perspective(Math.PI / 4, 1, 0.1, 100);
 
 // Creating View Matrix
-const viewMatrix = Camera.lookAt(
+const viewMatrix = Matrix.Camera.lookAt(
   Float32Array.of(0, 0, 10), // Eye Position
   Float32Array.of(0, 0, -1), // Target
   Float32Array.of(0, 1, 0)   // Up Vector
 );
 ```
 
-License
-------------
+# License
 Licensed under the [MIT license](LICENSE).
