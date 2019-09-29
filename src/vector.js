@@ -32,6 +32,10 @@ const cross = (vecA, vecB) => new Float32Array([
   vecA[0] * vecB[1] - vecA[1] * vecB[0],
 ]);
 
+const fromAngle = angle => new Float32Array([Math.cos(angle), Math.sin(angle)]);
+
+const toAngle = vec => Math.atan2(vec[1], vec[0]);
+
 const swizzle = (vec, swizz) => Float32Array.from(
   swizz.map(index => vec[Math.abs(index)] * Math.sign(1 / index))
 );
@@ -48,5 +52,9 @@ module.exports = {
   multiply,
   dot,
   cross,
+  fromAngle,
+  toAngle,
   swizzle
 }
+
+// TODO: normalize for Zero vector
