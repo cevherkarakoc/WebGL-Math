@@ -39,6 +39,8 @@ const fromAngle = angle => new Float32Array([Math.cos(angle), Math.sin(angle)]);
 
 const toAngle = vec => Math.atan2(vec[1], vec[0]);
 
+const rotate = (vec, angle) => fromAngle(toAngle(vec) + angle);
+
 const swizzle = (vec, swizz) =>
   Float32Array.from(
     swizz.map(index => vec[Math.abs(index)] * Math.sign(1 / index))
@@ -58,5 +60,6 @@ module.exports = {
   cross,
   fromAngle,
   toAngle,
+  rotate,
   swizzle,
 };

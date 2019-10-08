@@ -219,6 +219,36 @@ describe('Vector Functions', () => {
         expect(vectorA).toEqual(safe_vectorA);
       });
     });
+
+    describe('Rotate', () => {
+      test('Rotate (1,0) PI/2 to be equal (0,1)', () => {
+        const safe_vectorA = new Float32Array([1, 0]);
+        const vectorA = new Float32Array([1, 0]);
+        
+        const result = GLMath.Vector.rotate(vectorA, Math.PI/2);
+        const expected = new Float32Array([0, 1]);
+ 
+        expect(result[0]).toBeCloseTo(expected[0]);
+        expect(result[1]).toBeCloseTo(expected[1]);
+
+        // Check Side Effects
+        expect(vectorA).toEqual(safe_vectorA);
+      });
+
+      test('Rotate (0,1) 3PI/4 to be equal (-0.707107,-0.707107)', () => {
+        const safe_vectorA = new Float32Array([0, 1]);
+        const vectorA = new Float32Array([0, 1]);
+        
+        const result = GLMath.Vector.rotate(vectorA, 3*Math.PI/4);
+        const expected = new Float32Array([-0.707107, -0.707107]);
+ 
+        expect(result[0]).toBeCloseTo(expected[0]);
+        expect(result[1]).toBeCloseTo(expected[1]);
+
+        // Check Side Effects
+        expect(vectorA).toEqual(safe_vectorA);
+      });
+    })
   });
 
   describe('Non-Math Functions, A(9, 7, 5, -1)', () => {
