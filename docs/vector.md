@@ -161,3 +161,66 @@ const resultVector = GLMath.Vector.cross(
   new Float32Array([5, 6, 7])
 ); // [-3, 6, -3]
 ```
+
+## fromAngle
+Return the 2D Vector of the given angle: Vector (2D)
+
+Parameter | Type | Description
+--------- | ---- | -----------
+angle | Radian | The Angle in radian
+
+### Examples
+
+```js
+const vector = GLMath.Vector.fromAngle(Math.PI / 2); // [0, 1]
+```
+
+## toAngle
+Return the Angle of the Vector: Radian
+
+Parameter | Type | Description
+--------- | ---- | -----------
+vector | Vector(2D) | Two dimensional vector
+
+### Examples
+
+```js
+const myVector = new Float32Array([1, 1]);
+const vector = GLMath.Vector.toAngle(myVector); // Math.PI/4
+```
+
+## rotate
+Return the rotated vector: Vector (2D)
+
+Parameter | Type | Description
+--------- | ---- | -----------
+vector | Vector(2D) | 2D Vector to rotate
+angle  | Radian     | Angle(Radian) of rotation
+
+### Examples
+
+```js
+const myVector = new Float32Array([0, 1]);
+const vector = GLMath.Vector.rotate(myVector, Math.PI / 2); // [-1, 0]
+```
+
+## swizzle
+Return the swizzled vector: Vector (2D)
+
+Parameter | Type | Description
+--------- | ---- | -----------
+vector | Vector | Vector to swizzle
+swizz  | Array of Integers | Array that contains index of wanted components (Negative Index means to negative value)
+
+### Examples
+
+```js
+const X = 0,
+      Y = 1,
+      Z = 2;
+
+const myVector = new Float32Array([5, -4, 7]);
+const swizz = [Y, -Y, Z, -X, X];
+
+const resultVector = GLMath.Vector.swizzle(myVector, swizz); // [-4, 4, 7, -5, 5]
+```
