@@ -2,12 +2,7 @@ const GLMath = require('../index');
 
 describe('Matrix Functions', () => {
   test('Identy Matrix', () => {
-    const expected = new Float32Array([
-      1, 0, 0, 0,
-      0, 1, 0, 0,
-      0, 0, 1, 0,
-      0, 0, 0, 1,
-    ]);
+    const expected = new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
 
     const result = GLMath.Matrix.idendity(4);
 
@@ -15,17 +10,9 @@ describe('Matrix Functions', () => {
   });
 
   describe('Unary Operations', () => {
-    const matrixA = new Float32Array([
-      2.5 ,  3.7, 5.0,
-      -3.2,  1.5, -11.8,
-      6.3 , -1.2, 3.5,
-    ]);
+    const matrixA = new Float32Array([2.5, 3.7, 5.0, -3.2, 1.5, -11.8, 6.3, -1.2, 3.5]);
 
-    const safe_matrixA = new Float32Array([
-      2.5 , 3.7 , 5.0,
-      -3.2, 1.5 , -11.8,
-      6.3 , -1.2, 3.5,
-    ]);
+    const safe_matrixA = new Float32Array([2.5, 3.7, 5.0, -3.2, 1.5, -11.8, 6.3, -1.2, 3.5]);
 
     test('Determinant of A to equal -283.943', () => {
       const result = GLMath.Matrix.determinant(matrixA);
@@ -38,11 +25,7 @@ describe('Matrix Functions', () => {
     test('Transpose of A', () => {
       const result = GLMath.Matrix.transpose(matrixA);
 
-      const expected = new Float32Array([
-        2.5, -3.2 , 6.3,
-        3.7, 1.5  , -1.2,
-        5.0, -11.8, 3.5,
-      ]);
+      const expected = new Float32Array([2.5, -3.2, 6.3, 3.7, 1.5, -1.2, 5.0, -11.8, 3.5]);
 
       expect(result).toEqual(expected);
       // Check Side Effects
@@ -52,11 +35,7 @@ describe('Matrix Functions', () => {
     test('Negative A to equal -A', () => {
       const result = GLMath.Matrix.negative(matrixA);
 
-      const expected = new Float32Array([
-        -2.5, -3.7, -5.0,
-        3.2 , -1.5, 11.8,
-        -6.3, 1.2 , -3.5,
-      ]);
+      const expected = new Float32Array([-2.5, -3.7, -5.0, 3.2, -1.5, 11.8, -6.3, 1.2, -3.5]);
 
       expect(result).toEqual(expected);
       // Check Side Effects
@@ -135,126 +114,12 @@ describe('Matrix Functions', () => {
     test('A * B to equal expected', () => {
       const result = GLMath.Matrix.multiply(matrixA, matrixB);
 
-      const expected = new Float32Array([
-        -9 , 16, -5,
-        23 , 14, -48,
-        -53, 35, -29,
-      ]);
+      const expected = new Float32Array([-9, 16, -5, 23, 14, -48, -53, 35, -29]);
 
       expect(result).toEqual(expected);
       // Check Side Effects
       expect(matrixA).toEqual(safe_matrixA);
       expect(matrixB).toEqual(safe_matrixB);
-    });
-  });
-
-  describe('Transform Operations', () => {
-    const matrixA = GLMath.Matrix.idendity(4);
-
-    const V = new Float32Array([1.5, 3.0, 0.75]);
-
-    const safe_matrixA = GLMath.Matrix.idendity(4);
-    const safe_V = new Float32Array([1.5, 3.0, 0.75]);
-
-    test('Scale A by V to equal expected', () => {
-      const result = GLMath.Matrix.Transform.scale(matrixA, V);
-
-      const expected = new Float32Array([
-        1.5, 0, 0, 0,
-        0, 3.0, 0, 0,
-        0, 0, 0.75, 0,
-        0, 0, 0, 1.0,
-      ]);
-
-      expect(result).toEqual(expected);
-      // Check Side Effects
-      expect(matrixA).toEqual(safe_matrixA);
-      expect(V).toEqual(safe_V);
-    });
-
-    test('Translate A by V to equal expected', () => {
-      const result = GLMath.Matrix.Transform.translate(matrixA, V);
-
-      const expected = new Float32Array([
-        1, 0, 0, 0,
-        0, 1, 0, 0,
-        0, 0, 1, 0,
-        1.5, 3.0, 0.75, 1,
-      ]);
-
-      expect(result).toEqual(expected);
-      // Check Side Effects
-      expect(matrixA).toEqual(safe_matrixA);
-      expect(V).toEqual(safe_V);
-    });
-
-    test('Rotate A by V to equal expected', () => {
-      const result = GLMath.Matrix.Transform.rotate(
-        matrixA,
-        Math.PI / 4,
-        new Float32Array([1, 1, 0])
-      );
-
-      const expected = new Float32Array([
-        0.8535534143447876, 0.1464466154575348, -0.5, 0,
-        0.1464466154575348, 0.8535534143447876, 0.5, 0,
-        0.5, -0.5, 0.7071067690849304, 0,
-        0, 0, 0, 1,
-      ]);
-
-      for (let i = 0; i < 16; i++) expect(result[i]).toBeCloseTo(expected[i]);
-
-      expect(matrixA).toEqual(safe_matrixA);
-    });
-  });
-
-  describe('Camera Functions', () => {
-    test('Perspective Camera ', () => {
-      const result = GLMath.Matrix.Camera.perspective(
-        Math.PI / 6.0,
-        1.66,
-        3,
-        10
-      );
-
-      const expected = new Float32Array([
-        2.248223304748535, 0, 0, 0,
-        0, 3.732050895690918, 0, 0,
-        0, 0, -1.8571428060531616, -1,
-        0, 0, -8.571428298950195, 0,
-      ]);
-
-      for (let i = 0; i < 16; i++) expect(result[i]).toBeCloseTo(expected[i]);
-    });
-
-    test('Orthogonal Camera ', () => {
-      const result = GLMath.Matrix.Camera.ortho(-100, 100, -200, 200, 5, 100);
-
-      const expected = new Float32Array([
-        -0.01, 0, 0, 0,
-        0, 0.005, 0, 0,
-        0, 0, -0.021052632480859756, 0,
-        0, 0, -1.105263113975525, 1,
-      ]);
-
-      for (let i = 0; i < 16; i++) expect(result[i]).toBeCloseTo(expected[i]);
-    });
-
-    test('LookAt matrix to equal expected', () => {
-      const result = GLMath.Matrix.Camera.lookAt(
-        new Float32Array([0, 0, 15]),
-        new Float32Array([0, 0, -3]),
-        new Float32Array([0, 1, 0])
-      );
-
-      const expected = new Float32Array([
-        1, 0, 0, 0,
-        0, 1, 0, 0,
-        0, 0, 1, 0,
-        0, 0, -15, 1,
-      ]);
-
-      expect(result).toEqual(expected);
     });
   });
 });
