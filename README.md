@@ -1,6 +1,7 @@
 # WebGL-Math
 [![npm version](https://img.shields.io/npm/v/webgl-math.svg?style=flat)](https://www.npmjs.com/package/webgl-math)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcevherkarakoc%2FWebGL-Math.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcevherkarakoc%2FWebGL-Math?ref=badge_shield)
 
 A functional mathematics library for WebGL. 
 
@@ -57,3 +58,6 @@ const viewMatrix = Matrix.Camera.lookAt(
 
 # License
 Licensed under the [MIT license](LICENSE).
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcevherkarakoc%2FWebGL-Math.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcevherkarakoc%2FWebGL-Math?ref=badge_large)
