@@ -285,11 +285,9 @@
   	return n && n['default'] || n;
   }
 
-  var require$$0 = getCjsExportFromNamespace(_package$1);
+  var pjson = getCjsExportFromNamespace(_package$1);
 
-  const version$1 = require$$0.version;
-
-  var VERSION = version$1;
+  var VERSION = pjson.version;
   var Vector = vector;
   var Matrix = matrix;
   var Camera = camera;
