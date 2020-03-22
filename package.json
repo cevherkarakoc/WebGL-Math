@@ -1,13 +1,15 @@
 {
   "name": "webgl-math",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A Mathematics Library for WebGL",
   "main": "index.js",
   "scripts": {
+    "build": "rollup -c",
     "test": "jest",
     "test-watchAll": "jest --watchAll",
     "test-vector": "jest vector",
-    "test-matrix": "jest matrix"
+    "test-matrix": "jest matrix",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,10 @@
   },
   "homepage": "https://github.com/cevherkarakoc/WebGL-Math#readme",
   "devDependencies": {
-    "jest": "^24.9.0"
+    "jest": "^25.1.0",
+    "rollup": "^2.1.0",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-json": "^4.0.2",
+    "rollup-plugin-terser": "^5.3.0"
   }
 }
