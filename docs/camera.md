@@ -13,7 +13,7 @@ far | Number | farther distance for clipping
 ### Examples
 
 ```js
-const camera = GLMath.Matrix.Camera.perspective(Math.PI / 6.0, 16/9, 1, 10);
+const camera = GLMath.Camera.perspective(Math.PI / 6.0, 16/9, 1, 10);
 ```
 
 ## ortho
@@ -31,7 +31,7 @@ far | Number | farther distance for clipping
 ### Examples
 
 ```js
-const camera = GLMath.Matrix.Camera.ortho(-10, 10, -20, 20, 1, 10);
+const camera = GLMath.Camera.ortho(-10, 10, -20, 20, 1, 10);
 ```
 
 ## lookAt
@@ -50,7 +50,7 @@ const eye = new Float32Array([0, 0, 0]);  // origin
 const target = new Float32Array([0, 0, 3]);
 const up = new Float32Array([0, 1, 0]);
 
-const camera = GLMath.Matrix.Camera.lookAt(eye, target, up);
+const camera = GLMath.Camera.lookAt(eye, target, up);
 
 // camera is looking at from origin to +z
 
