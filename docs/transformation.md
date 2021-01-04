@@ -13,7 +13,7 @@ vector | Vector | the translation vector
 ```js
 const myMatrix = GLMath.Matrix.idendity( 4 );
 
-const resultMatrix = GLMath.Matrix.Transform.translate(
+const resultMatrix = GLMath.Transform.translate(
   myMatrix, 
   new Float32Array([1.5, 3.0, 0.75])
 );
@@ -40,7 +40,7 @@ const myMatrix = GLMath.Matrix.idendity( 4 );
 const angle = Math.PI / 4;
 const axis = new Float32Array([1, 1, 0]);
 
-const resultMatrix = GLMath.Matrix.Transform.rotate(
+const resultMatrix = GLMath.Transform.rotate(
   myMatrix, 
   angle,
   axis
@@ -66,7 +66,7 @@ vector | Vector | the scaling vector
 ```js
 const myMatrix = GLMath.Matrix.idendity( 4 );
 
-const resultMatrix = GLMath.Matrix.Transform.scale(myMatrix, new Float32Array([1.5, 3.0, 0.75]));
+const resultMatrix = GLMath.Transform.scale(myMatrix, new Float32Array([1.5, 3.0, 0.75]));
 
 //resultMatrix : [1.5, 0  , 0   , 0
 //                0  , 3.0, 0   , 0
