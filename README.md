@@ -26,14 +26,14 @@ Here's a simple example to create Model, View and Projection Matrices.
 
 For more, see the docs
 ```js
-import { Vector, Matrix } from 'webgl-math';
+import { Vector, Matrix, Transform, Camera } from 'webgl-math';
 
-const scaleMatrix = Matrix.Transform.scale(
+const scaleMatrix = Transform.scale(
   Matrix.idendity(4), 
   Float32Array.of(2, 2, 1) // Scale Vector
 );
 
-const translateMatrix  = Matrix.Transform.translate(
+const translateMatrix  = Transform.translate(
   Matrix.idendity(4),
   Float32Array.of(4, 0, 0) // Position Vector
 );
@@ -45,10 +45,10 @@ const modelMatrix = Matrix.multiply(
 );
 
 // Creating Perspective Projection Matrix with fovy and aspect ratio
-const projectionMatrix = Matrix.Camera.perspective(Math.PI / 4, 1, 0.1, 100);
+const projectionMatrix = Camera.perspective(Math.PI / 4, 1, 0.1, 100);
 
 // Creating View Matrix
-const viewMatrix = Matrix.Camera.lookAt(
+const viewMatrix = Camera.lookAt(
   Float32Array.of(0, 0, 10), // Eye Position
   Float32Array.of(0, 0, -1), // Target
   Float32Array.of(0, 1, 0)   // Up Vector
