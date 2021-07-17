@@ -1,3 +1,3 @@
 # WebGL-Math
 
-[Vector](#vector)
+[Vector](vector)
