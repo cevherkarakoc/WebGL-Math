@@ -24,7 +24,7 @@ import GLMath from 'webgl-math'
 ### Example
 Here's a simple example to create Model, View and Projection Matrices.
 
-For more, see the docs
+For more, see the [docs](https://cevherkarakoc.github.io/WebGL-Math)
 ```js
 import { Vector, Matrix, Transform, Camera } from 'webgl-math';
 
