@@ -12,7 +12,7 @@
   * [dot](vector#dot)
   * [cross](vector#cross)
   * [fromAngle](vector#fromangle)
-  * [toAngle](vector#toAngle)
+  * [toAngle](vector#toangle)
   * [rotate](vector#rotate)
   * [swizzle](vector#swizzle)
 * ### [Matrix](matrix)
